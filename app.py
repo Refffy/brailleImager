@@ -1,4 +1,4 @@
-import io, sys
+import sys
 from PIL import Image
 
 def dot2braille(*args):
