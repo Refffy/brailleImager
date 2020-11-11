@@ -21,12 +21,10 @@ def dot2braille(*args):
 # print(dot2braille(0, 1, 0, 1, 0, 1, 0, 1))
 
 
-def render():
-    img_Path = sys.argv[1]
-    img_Scale = float(sys.argv[2])
-    img = Image.open(img_Path)
+def render(img_path: str, img_scale: float):
+    img = Image.open(img_path)
     w, h = img.size
-    img = img.resize((int(w * img_Scale), int(h * img_Scale)))
+    img = img.resize((int(w * img_scale), int(h * img_scale)))
     w, h = img.size
     '''Dividing the image into chunks,
     each chunk is assigned a symbol
@@ -45,8 +43,15 @@ def render():
                                         (0.7152*px[1]) + (0.0722*px[2])) < 200
                 f.write(dot2braille(block))
             f.write('\n')
-    print("Done!")
 
 
 if __name__ == '__main__':
-    render()
+    try:
+        render(sys.argv[1], float(sys.argv[2]))
+        print("Done!")
+    except FileNotFoundError:
+        print(f'No such file: {sys.argv[1]}')
+        sys.exit(1)
+    except IndexError:
+        print("You did not specify scale or image")
+        sys.exit(1)
