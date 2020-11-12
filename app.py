@@ -48,10 +48,10 @@ def render(img_path: str, img_scale: float):
 if __name__ == '__main__':
     try:
         render(sys.argv[1], float(sys.argv[2]))
-        print("Done!")
+        print("[+]Done!")
     except FileNotFoundError:
-        print(f'No such file: {sys.argv[1]}')
+        print(f'[-]No such file: {sys.argv[1]}')
         sys.exit(1)
     except IndexError:
-        print("You did not specify scale or image")
+        print("[-]You did not specify scale or image")
         sys.exit(1)
